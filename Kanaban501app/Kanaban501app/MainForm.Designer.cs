@@ -62,15 +62,15 @@
 
             this.btnNew.Text = "New";
             this.btnNew.Location = new System.Drawing.Point(12, 330);
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            this.btnNew.Click += new System.EventHandler(this.BtnNew_Click);
 
             this.btnEdit.Text = "Edit";
             this.btnEdit.Location = new System.Drawing.Point(100, 330);
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            this.btnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
 
             this.btnDelete.Text = "Delete";
             this.btnDelete.Location = new System.Drawing.Point(190, 330);
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
 
             this.ClientSize = new System.Drawing.Size(670, 380);
             this.Controls.Add(this.listToDo);

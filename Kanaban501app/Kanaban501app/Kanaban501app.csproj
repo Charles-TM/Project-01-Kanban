@@ -61,6 +61,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Status.cs" />
     <EmbeddedResource Include="GoalDialogue.resx">
       <DependentUpon>GoalDialogue.cs</DependentUpon>
     </EmbeddedResource>

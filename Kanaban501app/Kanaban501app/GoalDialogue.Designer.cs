@@ -106,7 +106,7 @@
             this.btnOK.Size = new System.Drawing.Size(75, 28);
             this.btnOK.TabIndex = 3;
             this.btnOK.Text = "OK";
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            this.btnOK.Click += new System.EventHandler(this.BtnOK_Click);
             #endregion
 
             #region btnCancel
@@ -115,7 +115,7 @@
             this.btnCancel.Size = new System.Drawing.Size(75, 28);
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Cancel";
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             #endregion
             
             #region lblResources

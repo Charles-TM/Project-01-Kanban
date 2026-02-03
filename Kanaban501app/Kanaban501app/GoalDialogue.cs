@@ -4,8 +4,14 @@ using System.Windows.Forms;
 
 namespace Kanban501
 {
+    /// <summary>
+    /// Add and edit dialogue
+    /// </summary>
     public partial class GoalDialog : Form
     {
+        /// <summary>
+        /// blank activity to make new goals
+        /// </summary>
         public GoalActivity Activity { get; private set; }
 
         public GoalDialog()
@@ -20,21 +26,41 @@ namespace Kanban501
             txtTitle.Text = activity.Title;
             datePicker.Value = activity.CompleteBy;
             comboStatus.SelectedItem = activity.Status;
+            txtResources.Text = activity.Resources;
         }
+        /// <summary>
+        /// submits changes to add edit goals
+        /// </summary>
+        /// <param name="sender">button</param>
+        /// <param name="e">click</param>
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void BtnOK_Click(object sender, EventArgs e)
         {
-            if (Activity == null)
-                Activity = new GoalActivity();
+            if (txtTitle.Text == string.Empty)
+            {
+                MessageBox.Show("Please give this goal a name!");
+            }
+            else
+            {
 
-            Activity.Title = txtTitle.Text;
-            Activity.CompleteBy = datePicker.Value.Date;
-            Activity.Status = (Status)comboStatus.SelectedItem;
+                if (Activity == null)
+                    Activity = new GoalActivity();
 
-            DialogResult = DialogResult.OK;
+                Activity.Title = txtTitle.Text;
+                Activity.CompleteBy = datePicker.Value.Date;
+                Activity.Status = (Status)comboStatus.SelectedItem;
+                Activity.Resources = txtResources.Text;
+
+
+                DialogResult = DialogResult.OK;
+            }
         }
-
-        private void btnCancel_Click(object sender, EventArgs e)
+        /// <summary>
+        /// cancels changes to add edit goals
+        /// </summary>
+        /// <param name="sender">button</param>
+        /// <param name="e">click</param>
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
         }
