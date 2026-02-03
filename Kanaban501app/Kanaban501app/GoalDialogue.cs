@@ -17,6 +17,8 @@ namespace Kanban501
         public GoalDialog()
         {
             InitializeComponent();
+            datePicker.Format = DateTimePickerFormat.Custom;
+            datePicker.CustomFormat = "MM/dd/yyyy";
             comboStatus.DataSource = Enum.GetValues(typeof(Status));
         }
 
@@ -40,6 +42,7 @@ namespace Kanban501
             {
                 MessageBox.Show("Please give this goal a name!");
             }
+            
             else
             {
 

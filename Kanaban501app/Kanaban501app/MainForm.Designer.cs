@@ -1,4 +1,6 @@
-﻿namespace Kanaban501app
+﻿using System.Windows.Forms;
+
+namespace Kanaban501app
 {
     partial class MainForm
     {
@@ -25,6 +27,7 @@
         private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDelete;
+        
 
         #region Windows Form Designer generated code
 
@@ -37,6 +40,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+       
+
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);

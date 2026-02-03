@@ -6,7 +6,6 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Label lblStatus;
-        private System.Windows.Forms.Label lblResources;
         private System.Windows.Forms.TextBox txtTitle;
         private System.Windows.Forms.DateTimePicker datePicker;
         private System.Windows.Forms.ComboBox comboStatus;
@@ -28,7 +27,6 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
-            this.lblResources = new System.Windows.Forms.Label();
             this.txtTitle = new System.Windows.Forms.TextBox();
             this.datePicker = new System.Windows.Forms.DateTimePicker();
             this.comboStatus = new System.Windows.Forms.ComboBox();
@@ -66,16 +64,6 @@
             this.lblStatus.TabIndex = 2;
             this.lblStatus.Text = "Status:";
             #endregion
-            
-            #region lblResources
-            this.lblResources.AutoSize = true;
-            this.lblResources.Location = new System.Drawing.Point(15, 55);
-            this.lblResources.Name = "lblResources";
-            this.lblResources.Size = new System.Drawing.Size(87, 16);
-            this.lblResources.TabIndex = 0;
-            this.lblResources.Text = "Resources:";
-            #endregion
-            
             
             #region txtTitle
             this.txtTitle.Location = new System.Drawing.Point(110, 12);
@@ -158,6 +146,7 @@
             this.ResumeLayout(false);
 
             this.PerformLayout();
+
 
         }
 

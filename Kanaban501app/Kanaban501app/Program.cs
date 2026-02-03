@@ -6,6 +6,9 @@ using System.Windows.Forms;
 
 namespace Kanaban501app
 {
+    /// <summary>
+    /// main program, runs the whole shebang
+    /// </summary>
     internal static class Program
     {
         /// <summary>

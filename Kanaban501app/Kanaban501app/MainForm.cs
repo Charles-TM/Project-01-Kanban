@@ -1,13 +1,9 @@
 ﻿using Kanban501;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Kanaban501app
@@ -25,13 +21,19 @@ namespace Kanaban501app
         public MainForm()
         {
             InitializeComponent();
+            listToDo.DrawMode = DrawMode.OwnerDrawFixed;
+            listWorking.DrawMode = DrawMode.OwnerDrawFixed;
+            listDone.DrawMode = DrawMode.OwnerDrawFixed;
+            listToDo.DrawItem += List_DrawItem;
+            listWorking.DrawItem += List_DrawItem;
+            listDone.DrawItem += List_DrawItem;
             LoadData();
             RefreshLists();
         }
         /// <summary>
         /// list of all goals for display
         /// </summary>
-        private List<GoalActivity> _activities = new List<GoalActivity>();
+        private readonly List<GoalActivity> _activities = new List<GoalActivity>();
         /// <summary>
         /// called when list is edited
         /// </summary>
@@ -48,7 +50,9 @@ namespace Kanaban501app
                 if (g.Status == Status.Done) listDone.Items.Add(g);
             }
 
-            btnNew.Enabled = listToDo.Items.Count < 15 || listWorking.Items.Count < 3;
+            btnNew.Enabled =
+                listToDo.Items.Count < 15 &&
+                listWorking.Items.Count < 3;
         }
         /// <summary>
         /// starts the goal dialogue edit a new goal
@@ -80,6 +84,12 @@ namespace Kanaban501app
             {
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
+                    if (selected.Status == Status.WorkingOn && !CanMoveToWorkingOn(selected))
+                    {
+                        MessageBox.Show("Only 3 activities can be in Working On.");
+                        selected.Status = Status.ToDo;
+                    }
+
                     RefreshLists();
                 }
             }
@@ -87,7 +97,7 @@ namespace Kanaban501app
         /// <summary>
         /// removes the selected activity 
         /// </summary>
-        /// <param name="sender">deelte button</param>
+        /// <param name="sender">delete button</param>
         /// <param name="e">click</param>
         private void BtnDelete_Click(object sender, EventArgs e)
         {
@@ -133,5 +143,48 @@ namespace Kanaban501app
                     sw.WriteLine(g.ToFileString());
             }
         }
+        /// <summary>
+        /// gets the listbox item thats overdue and changes its forecolor red
+        /// </summary>
+        /// <param name="sender">lists</param>
+        /// <param name="e">make it red</param>
+        private void List_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+
+            var list = (ListBox)sender;
+            var activity = (GoalActivity)list.Items[e.Index];
+
+            bool overdue = activity.CompleteBy.Date < DateTime.Today &&
+                            activity.Status != Status.Done;
+
+            e.DrawBackground();
+
+            Color color = overdue ? Color.Red : e.ForeColor;
+
+            TextRenderer.DrawText(
+                e.Graphics,
+                activity.ToString(),
+                e.Font,
+                e.Bounds,
+                color
+            );
+
+            e.DrawFocusRectangle();
+        }
+        /// <summary>
+        /// makes sure that any edit or added item cant be grandfathered in to break the 15 3 limits
+        /// </summary>
+        /// <param name="activity">current goal</param>
+        /// <returns>if you can move it</returns>
+        private bool CanMoveToWorkingOn(GoalActivity activity)
+        {
+            int workingCount = _activities.Count(a =>
+                a.Status == Status.WorkingOn && a != activity);
+
+            return workingCount < 3;
+        }
+
+
     }
 }
